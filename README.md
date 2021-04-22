@@ -36,6 +36,7 @@ You may reach me at hiidihyah@gmail.com if you have any inquiries.
 -CS50's David Malan, Doug Lloyd, Brian Yu and staffs for guidance.
 
 === PROJECT CONTRIBUTERS ===
+
 -Dihyah Hii
 
 This project is something I consider a lifelong and stepping-stone project 
