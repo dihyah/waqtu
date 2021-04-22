@@ -26,10 +26,10 @@ You may reach me at hiidihyah@gmail.com if you have any inquiries.
 
 
 === SPECIAL THANKS ===
-to Al Adhan(https://aladhan.com/about) for providing open source API for developers without having to reinvent the wheel for prayer time calculations and etc.
-PrayTimes.org, 
-OpenStreetMap and Nominatim, 
-CS50's David Malan, Doug Lloyd, Brian Yu and staffs for guidance.
+#to Al Adhan(https://aladhan.com/about) for providing open source API for developers without having to reinvent the wheel for prayer time calculations and etc.
+#PrayTimes.org, 
+#OpenStreetMap and Nominatim, 
+#CS50's David Malan, Doug Lloyd, Brian Yu and staffs for guidance.
 
 #Project Contributors 
 -Dihyah Hii
