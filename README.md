@@ -1,3 +1,5 @@
+#Adhina
+
 Thank you for taking your time to view the Adhina project.
 
 Adhina is a web app that serves as a personal assistance 
@@ -23,13 +25,10 @@ Contact Me:
 You may reach me at hiidihyah@gmail.com if you have any inquiries.
 
 
-SPECIAL THANKS
+=== SPECIAL THANKS ===
 to Al Adhan(https://aladhan.com/about) for providing open source API for developers without having to reinvent the wheel for prayer time calculations and etc.
-PrayTimes.org
-OpenStreetMap and Nominatim
-Bootstrap4
-jQuery
-Python and Flask
+PrayTimes.org, 
+OpenStreetMap and Nominatim, 
 CS50's David Malan, Doug Lloyd, Brian Yu and staffs for guidance.
 
 #Project Contributors 
