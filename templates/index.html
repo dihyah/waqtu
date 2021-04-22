@@ -1,0 +1,139 @@
+<!--
+Adhina is a web app that serves as a personal assistance 
+for muslims around the world. At its core function, the app 
+allows users to be aware and ahead of their daily prayer times.
+Copyright (C) 2020 Dihyah Al Hii
+
+Adhina is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+Adhina is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with Adhina.  If not, see <https://www.gnu.org/licenses/>.
+-->
+
+
+{% extends "layout.html" %}
+
+{% block head %}
+    <!--vuejs-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+{% endblock %}
+
+{% block title %} Home {% endblock %}
+
+{% block main %}
+    <!--Shows user's location.-->
+    <h1>
+        Location: <p id="location" class="d-inline"> {{ zone }} </p>
+    <!-- Request user's location -->
+    <div id="app"> {{ message }} </div>
+    </h1>
+
+    <!-- <p class="small text-muted">In order to display accurate prayer times, the service must require the user to allow permission to get user's location.</p> -->
+    <hr>
+
+    <form action="/" method="post">
+        <div class="form-group">
+            <input id="input" class="form-control" autocomplete="off" autofocus type="text" name="location" placeholder="Enter your location.">
+        </div>
+        <button id="submit" class="btn btn-primary d-inline" type="submit" disabled>Locate</button>
+    </form>
+
+    <br>
+    <br>
+
+    <!-- Displays countdown to upcoming prayer time -->
+    <h2>Date: 
+        <p id="currentDate" class="d-inline "></p>
+    </h2>
+    <hr>
+    <h2>Next prayer time in:
+        <p id="timer" class="d-inline"></p>
+    </h2>
+
+    <!-- Displays lists prayer time for current date-->
+    <table class ="table table-responsive-lg">
+
+        <thead>
+            <td>Fajr</td>
+            <td>Sunrise</td>
+            <td>Dhuhr</td>
+            <td>Asr</td>
+            <td>Maghrib</td>
+            <td>Issha'</td>
+        </thead>
+
+        <tbody>
+            <td id="fajr">{{ fajr }}</td>
+            <td id="sunrise">{{ sunrise }}</td>
+            <td id="dhuhr">{{ dhuhr }}</td>
+            <td id="asr">{{ asr }}</td>
+            <td id="maghrib">{{ maghrib }}</td>
+            <td id="isha">{{ isha }}</td>
+        </tbody>
+    </table>
+
+    {% block script %}
+            <script> 
+
+                var app = new Vue({
+                    el: '#app',
+                        data:{
+                            message: 'Hello Vue!'
+                        }
+                    })
+
+                //Get geolocation
+                var x = document.getElementById("location");
+                navigator.geolocation.getCurrentPosition(function(position){ 
+                    x.innerHTML = (position.coords.latitude+', '+position.coords.longitude);
+                });
+
+                //Disables submit button if user doesn't input anything.
+                document.querySelector('#input').onkeyup = function(){
+                    if (document.querySelector('#input').value === ''){
+                        document.querySelector('#submit').disabled = true;
+                    } else {
+                        document.querySelector('#submit').disabled = false;
+                        }
+                }
+
+                //Get current date
+                var currentDate = document.getElementById("currentDate");
+                    let today = new Date().toLocaleDateString();
+                        currentDate.innerHTML = (today); 
+                    
+
+                //Set deadline
+                var countDownDate = new Date("Aug 7, 2021 00:00:00").getTime();
+                //Update countdown every 1 second
+                var y = setInterval(function(){
+                    //Get today's datetime
+                    var now = new Date().getTime();
+                    //Find the distance between now and countdown Date
+                    var distance = countDownDate - now;
+                    //Time calculations for days, hours, minutes and seconds
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    //Display the result in the element with id="timer"
+                    document.getElementById("timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+                    //If countdown is finished, write some text
+                    if (distance < 0) {
+                        clearInterval(y);
+                        document.getElementById("timer").innerHTML = "EXPIRED";
+                    }
+                }, 1000);
+
+            </script>
+    {% endblock %}
+{% endblock %}
+
