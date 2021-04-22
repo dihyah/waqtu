@@ -1,4 +1,4 @@
-#Adhina
+#ADHINA
 
 Thank you for taking your time to view the Adhina project.
 
@@ -6,7 +6,7 @@ Adhina is a web app that serves as a personal assistance
 for muslims around the world. At its core function, the app 
 allows users to be aware and ahead of their daily prayer times.
 
-Copyright (C) 2020 Dihyah Al Hii
+Copyright (C) 2021 Dihyah Al Hii
 
 Adhina is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
@@ -26,12 +26,16 @@ You may reach me at hiidihyah@gmail.com if you have any inquiries.
 
 
 === SPECIAL THANKS ===
-#to Al Adhan(https://aladhan.com/about) for providing open source API for developers without having to reinvent the wheel for prayer time calculations and etc.
-#PrayTimes.org, 
-#OpenStreetMap and Nominatim, 
-#CS50's David Malan, Doug Lloyd, Brian Yu and staffs for guidance.
 
-#Project Contributors 
+-to Al Adhan(https://aladhan.com/about) for providing open source API for developers without having to reinvent the wheel for prayer time calculations and etc.
+
+-PrayTimes.org, 
+
+-OpenStreetMap and Nominatim, 
+
+-CS50's David Malan, Doug Lloyd, Brian Yu and staffs for guidance.
+
+=== PROJECT CONTRIBUTERS ===
 -Dihyah Hii
 
 This project is something I consider a lifelong and stepping-stone project 
