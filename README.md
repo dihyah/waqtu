@@ -1,4 +1,4 @@
-#ADHINA
+# ADHINA
 
 Thank you for taking your time to view the Adhina project.
 
@@ -84,9 +84,19 @@ themselves would also benefit as they themselves would use the
 app with the newfound features that they developed.
 
 
-**Version Pre-Alpha**
+**Version Alpha**
+
 Currently, the project itself isn't feature-rich as the 
 developer behind it is still new to web development.
 Essentially, the web app addresses its core function 
 which is to display the list of prayer times relevant 
 to the user's location as well as the current date. 
+In this phase, new features and ideas are being explored 
+and tested.
+
+**Run (in development mode)**
+Under Mac/Linux
+1. Go into the folder by 'cd' into the directory
+2. In CLI(command line interface), type 'export FLASK_APP=application.py'
+3. Type 'flask run', enter and it will start running the server.
+4. Go to 127.0.0.1:5000 at your local browser to view the web app.
