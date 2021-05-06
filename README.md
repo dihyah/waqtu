@@ -96,7 +96,8 @@ and tested.
 
 **Run (in development mode)**
 Under Mac/Linux
-1. Go into the folder by 'cd' into the directory
-2. In CLI(command line interface), type 'export FLASK_APP=application.py'
-3. Type 'flask run', enter and it will start running the server.
-4. Go to 127.0.0.1:5000 at your local browser to view the web app.
+1. Make sure Flask is installed.
+2. Go into the folder by 'cd' into the directory
+3. In CLI(command line interface), type 'export FLASK_APP=application.py'
+4. Type 'flask run', enter and it will start running the server.
+5. Go to 127.0.0.1:5000 at your local browser to view the web app.
