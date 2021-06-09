@@ -1,0 +1,71 @@
+body{
+	background-color: #a3cf5a;
+	font-family: Codec-Pro;
+	color: #006838;
+}
+
+/*custom-font*/
+@font-face {
+    font-family: Codec-Pro;
+    src: url(/static/codec-pro.regular.ttf);
+}
+
+@font-face {
+    font-family: Digital-7;
+    src: url(/static/digital-7.ttf);
+}
+
+/*For Home Page Only*/
+.forContents{
+    background-image: url(/static/bg03.png);
+    background-size: cover;
+    font-family: Codec-Pro;
+    color: #006838;
+}
+
+/*Navigation Section*/
+.navbar{
+    font-family: Codec-Pro;
+    font-weight: bold;
+    background-color: #26b468;
+}
+
+.navbar-brand{
+    color: #006838;
+    font-size: 2rem;
+    margin-left: 10px;
+}
+
+.navbar-brand img{
+    padding-top: 10px;
+    width: 120px;
+    height: auto;
+}
+
+.navbar-toggler-icon{
+    background-image: url(img/toggle-icon.png);
+}
+
+/* change the link color and add padding for height */
+.navbar .navbar-nav .nav-link {
+    color: #006838;
+    padding: 6px 10px;
+}
+
+/* change the color of active or hovered links */
+.navbar .nav-item.active .nav-link,
+.navbar .nav-item:hover .nav-link {
+    color: #006838;
+    background-color: #f1f2f2; /* add background-color to active links */
+    border-radius: 5px;
+}
+
+.termPage{
+    height: 450px;
+    width: auto;
+}
+
+.aboutPage{
+    height: 450px;
+    width: auto;
+}
