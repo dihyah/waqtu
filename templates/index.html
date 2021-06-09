@@ -1,139 +1,268 @@
 <!--
-Adhina is a web app that serves as a personal assistance 
+Waqtu is a web app that serves as a personal assistance 
 for muslims around the world. At its core function, the app 
 allows users to be aware and ahead of their daily prayer times.
 Copyright (C) 2020 Dihyah Al Hii
 
-Adhina is free software: you can redistribute it and/or modify
+Waqtu is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 any later version.
 
-Adhina is distributed in the hope that it will be useful,
+Waqtu is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
-along with Adhina.  If not, see <https://www.gnu.org/licenses/>.
+along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
 
 {% extends "layout.html" %}
 
 {% block head %}
-    <!--vuejs-->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 {% endblock %}
 
 {% block title %} Home {% endblock %}
 
 {% block main %}
-    <!--Shows user's location.-->
-    <h1>
-        Location: <p id="location" class="d-inline"> {{ zone }} </p>
     <!-- Request user's location -->
-    <div id="app"> {{ message }} </div>
-    </h1>
+    <!--Shows user's location.-->
 
-    <!-- <p class="small text-muted">In order to display accurate prayer times, the service must require the user to allow permission to get user's location.</p> -->
-    <hr>
+    <p class="small text-light">In order to display accurate prayer times, the service must require the user to allow permission to get user's location.</p> 
 
-    <form action="/" method="post">
-        <div class="form-group">
-            <input id="input" class="form-control" autocomplete="off" autofocus type="text" name="location" placeholder="Enter your location.">
+    <!--Content-->
+    <div class="container display_content">
+        <div class="row row01">
+            <!--showing current prayer time & date-->
+            <div class="col-md-4 col01">
+                <div class="timeNow">
+                  <h1 class="nowHeader font-weight-bold">NOW</h1>
+                  <h1 class="now font-weight-bold">DHUHR</h1>
+                </div>
+                <div class="dateToday"><span class="text-uppercase" id="local_day"></span>, <span class="date" id="currentDate"></span></div>
+                <div class="locationHeader">YOUR LOCATION IS, <p id="location" class="d-inline"> {{ zone }} </p> </div>
+
+                <div class="place font-weight-bold text-uppercase" id="place"></div>
+            </div>
+            <!--showing local clock-->
+            <div class="localClock col-md-2 col02 text-center" id="current_time"></div>
+            <!--showing Upcoming Prayer Time-->
+            <div class="upcomingPrayer col-md-6 col03 text-center">
+                <h1 class="upcomingHeader font-weight-bold">UPCOMING PRAYER</h1>
+                <div class="nextPrayer">ASR <span class="nextPrayerTime">15:44pm</span></div>
+                <div class="countDownHeader">NEXT PRAYER TIME IN,</div>
+                <div class="countDownTimer" id="timer">2<span>H</span> 18<span>M</span> 10<span>S</span></div>
+            </div>
+        </div><!--/row01-->
+    </div><!--/display_content-->
+
+    <!--Display PrayerTime Table-->
+    <div class="container prayerTimeInfo">
+        <!-- Displays lists prayer time for current date-->
+        <table class ="table table-responsive-lg text-center font-weight-bold">
+
+            <thead>
+                <td>FAJR</td>
+                <td>SUNRISE</td>
+                <td>DHUHR</td>
+                <td>ASR</td>
+                <td>MAGHRIB</td>
+                <td>ISHA</td>
+            </thead>
+
+            <tbody>
+                <td id="fajr">{{ fajr }}</td>
+                <td id="sunrise">{{ sunrise }}</td>
+                <td id="dhuhr">{{ dhuhr }}</td>
+                <td id="asr">{{ asr }}</td>
+                <td id="maghrib">{{ maghrib }}</td>
+                <td id="isha">{{ isha }}</td>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container weatherInfo">
+        <div class="row row02 text-center">
+            <!--weather status icon-->
+            <div class="col-md-2 col04">
+                <div class="weather-icon"><img src="static/icon/unknown.png"></div>
+            </div>
+            <div class="col-md-10 col05">
+            <!--weather information display-->
+                <div class="weather">
+                    <table class ="table table-responsive-lg font-weight-bold text-uppercase">
+                        <thead>
+                            <td>WEATHER STATUS</td>
+                            <td>CURRENT &deg;C</td>
+                            <td>MIN &deg;C</td>
+                            <td>MAX &deg;C</td>
+                        </thead>
+
+                        <tbody>
+                            <td id="weatherType">{{ weather_type }}</td>
+                            <td id="temp">{{ temperature }}</td>
+                            <td id="min">{{ max_temp }}</td>
+                            <td id="max">{{ max_temp }}</td>
+                        </tbody>
+                    </table>
+                </div>
+            </div>   
         </div>
-        <button id="submit" class="btn btn-primary d-inline" type="submit" disabled>Locate</button>
-    </form>
-
-    <br>
-    <br>
-
-    <!-- Displays countdown to upcoming prayer time -->
-    <h2>Date: 
-        <p id="currentDate" class="d-inline "></p>
-    </h2>
-    <hr>
-    <h2>Next prayer time in:
-        <p id="timer" class="d-inline"></p>
-    </h2>
-
-    <!-- Displays lists prayer time for current date-->
-    <table class ="table table-responsive-lg">
-
-        <thead>
-            <td>Fajr</td>
-            <td>Sunrise</td>
-            <td>Dhuhr</td>
-            <td>Asr</td>
-            <td>Maghrib</td>
-            <td>Issha'</td>
-        </thead>
-
-        <tbody>
-            <td id="fajr">{{ fajr }}</td>
-            <td id="sunrise">{{ sunrise }}</td>
-            <td id="dhuhr">{{ dhuhr }}</td>
-            <td id="asr">{{ asr }}</td>
-            <td id="maghrib">{{ maghrib }}</td>
-            <td id="isha">{{ isha }}</td>
-        </tbody>
-    </table>
 
     {% block script %}
             <script> 
 
-                var app = new Vue({
-                    el: '#app',
-                        data:{
-                            message: 'Hello Vue!'
-                        }
-                    })
+        //Global variable declaration
+        var latitude = document.createElement('p');
+        var longitude = document.createElement('p');
+        //Location display
+        var position = document.getElementById("location");
+        //Get current date
+        var currentDate = document.getElementById("currentDate");
+        let today = new Date().toLocaleDateString();
+        //Search box
+        const input = document.getElementById("input");
+        let submit = document.querySelector('#submit');
+        //Declare api bases
+        const location_api = "https://api.bigdatacloud.net/data/reverse-geocode-client?"
+        const weather_api = {
+            key: "5dac0acc7f516749376b21bd0e3fea7a",
+            base: "https://api.openweathermap.org/data/2.5/"
+        }        
+        const prayer_api = "https://api.aladhan.com/v1/timingsByAddress/"
+            
+        //Display current date
+        currentDate.innerHTML = (today); 
 
-                //Get geolocation
-                var x = document.getElementById("location");
-                navigator.geolocation.getCurrentPosition(function(position){ 
-                    x.innerHTML = (position.coords.latitude+', '+position.coords.longitude);
-                });
+        //Get geolocation
+        navigator.geolocation.getCurrentPosition(function(position){
+            //console.log(`latitude: ${position.coords.latitude}, longitude: ${position.coords.longitude}`);
+            latitude.innerText = position.coords.latitude;
+            longitude.innerText = position.coords.longitude;
+            getLocation(latitude, longitude);
+        });
 
-                //Disables submit button if user doesn't input anything.
-                document.querySelector('#input').onkeyup = function(){
-                    if (document.querySelector('#input').value === ''){
-                        document.querySelector('#submit').disabled = true;
-                    } else {
-                        document.querySelector('#submit').disabled = false;
-                        }
+        //Disables submit button if user doesn't input anything.
+        document.querySelector('#input').onkeyup = function(){
+            if (document.querySelector('#input').value === ''){
+                document.querySelector('#submit').disabled = true;
+            } else {
+                document.querySelector('#submit').disabled = false;
                 }
+        }
 
-                //Get current date
-                var currentDate = document.getElementById("currentDate");
-                    let today = new Date().toLocaleDateString();
-                        currentDate.innerHTML = (today); 
-                    
+        //Event Listener Function on submit
+        submit.addEventListener('click', function(){
+            console.log('click');
+            getLocation(latitude, longitude);
+            getWeatherReport(input.value);
+            getPrayerTimes(input.value);
+        })
 
-                //Set deadline
-                var countDownDate = new Date("Aug 7, 2021 00:00:00").getTime();
-                //Update countdown every 1 second
-                var y = setInterval(function(){
-                    //Get today's datetime
-                    var now = new Date().getTime();
-                    //Find the distance between now and countdown Date
-                    var distance = countDownDate - now;
-                    //Time calculations for days, hours, minutes and seconds
-                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                    //Display the result in the element with id="timer"
-                    document.getElementById("timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
-                    //If countdown is finished, write some text
-                    if (distance < 0) {
-                        clearInterval(y);
-                        document.getElementById("timer").innerHTML = "EXPIRED";
-                    }
-                }, 1000);
+        //Event Listener Function on keypress
+        input.addEventListener("keypress", event);
+        function event(key){
+            if (key.keyCode == 13) {
+            getWeatherReport(input.value);//for getting weather infos from API
+            getPrayerTimes(input.value);
+          }
+        }
+
+        //Parse URL for JSON data
+        //Get Location (https://api.bigdatacloud.net/data/reverse-geocode-client?4.9&114.08&localityLanguage=en)
+        function getLocation(latitude, longitude){
+            fetch(`${location_api}${latitude.innerText}&${longitude.innerText}&localityLanguage=en`)
+            .then(address =>{
+                return address.json();
+            }).then(show);
+        }
+        
+        //Get Weather Report (https://api.openweathermap.org/data/2.5/weather?q=gadong&appid=5dac0acc7f516749376b21bd0e3fea7a)
+        function getWeatherReport(city){
+	    fetch(`${weather_api.base}weather?q=${city}&appid=${weather_api.key}&units=metric`)
+	    .then(weather =>{
+		    return weather.json();
+	    }).then(showWeatherReport);
+        }
+
+        //Get Prayer times (https://api.aladhan.com/v1/timingsByAddress?address=Brunei&method=3)
+        function getPrayerTimes(location){
+            fetch(`${prayer_api}{today}?address=${input.value}&method=3`)
+            .then(location =>{
+                return location.json();
+            }).then(display);
+        }
+                
+        //Display extracted JSON
+        //Show address
+        function show(address){
+            position.innerHTML = `${address.locality}`;
+        }
+
+        //Show weather report
+        function showWeatherReport(weather){
+            let temperature = document.getElementById("temp");
+            temperature.innerHTML = `${Math.round(weather.main.temp)}&deg;C`;
+
+            let  minTemp = document.getElementById("min");
+            minTemp.innerHTML = `${Math.round(weather.main.temp_min)}&deg;C`;
+
+            let  maxTemp = document.getElementById("max");
+            maxTemp.innerHTML = `${Math.round(weather.main.temp_max)}&deg;C`;
+
+            let weatherType = document.getElementById("weatherType");
+            weatherType.innerText = weather.weather[0].main;
+
+            position.innerHTML = `${weather.name}`;
+        }       
+                
+        //Show prayer times
+        function display(location){
+            let fajr = document.getElementById('fajr');
+            fajr.innerText = `${location.data.timings.Fajr}`
+
+            let sunrise = document.getElementById('sunrise');
+            sunrise.innerText = `${location.data.timings.Sunrise}`
+
+            let dhuhr = document.getElementById('dhuhr');
+            dhuhr.innerText = `${location.data.timings.Dhuhr}`
+
+            let asr = document.getElementById('asr');
+            asr.innerText = `${location.data.timings.Asr}`
+
+            let maghrib = document.getElementById('maghrib');
+            maghrib.innerText = `${location.data.timings.Maghrib}`
+
+            let isha = document.getElementById('isha');
+            isha.innerText = `${location.data.timings.Isha}`
+        }
+              
+/*
+        //Set deadline
+        var countDownDate = new Date("Aug 7, 2021 00:00:00").getTime();
+        //Update countdown every 1 second
+        var y = setInterval(function(){
+            //Get today's datetime
+            var now = new Date().getTime();
+            //Find the distance between now and countdown Date
+            var distance = countDownDate - now;
+            //Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            //Display the result in the element with id="timer"
+            document.getElementById("timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+            //If countdown is finished, display texts
+            if (distance < 0) {
+                clearInterval(y);
+                document.getElementById("timer").innerHTML = "TIME'S UP";
+            }
+        }, 1000);
+*/
 
             </script>
     {% endblock %}
 {% endblock %}
-
