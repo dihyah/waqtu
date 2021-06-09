@@ -1,25 +1,25 @@
-# ADHINA
+# WAQTU
 
-Thank you for taking your time to view the Adhina project.
+Thank you for taking your time to view the Waqtu project.
 
-Adhina is a web app that serves as a personal assistance 
+Waqtu is a web app that serves as a personal assistance 
 for muslims around the world. At its core function, the app 
 allows users to be aware and ahead of their daily prayer times.
 
 Copyright (C) 2021 Dihyah Al Hii
 
-Adhina is free software: you can redistribute it and/or modify
+Waqtu is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 any later version.
 
-Adhina is distributed in the hope that it will be useful,
+Waqtu is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details.
 
 You should have received a copy of the GNU Affero General Public License
-along with Adhina.  If not, see <https://www.gnu.org/licenses/>.
+along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
 
 Contact Me:
 You may reach me at hiidihyah@gmail.com if you have any inquiries.
@@ -84,7 +84,7 @@ themselves would also benefit as they themselves would use the
 app with the newfound features that they developed.
 
 
-**Version Alpha**
+**2020/08/10 Version Alpha**
 
 Currently, the project itself isn't feature-rich as the 
 developer behind it is still new to web development.
@@ -95,9 +95,10 @@ In this phase, new features and ideas are being explored
 and tested.
 
 **Run (in development mode)**
-Under Mac/Linux
-1. Make sure Flask is installed.
-2. Go into the folder by 'cd' into the directory
-3. In CLI(command line interface), type 'export FLASK_APP=application.py'
-4. Type 'flask run', enter and it will start running the server.
-5. Go to 127.0.0.1:5000 at your local browser to view the web app.
+Prerequisite: Make sure Flask is installed.
+
+Mac/Linux
+1. Go into the folder by 'cd' into the directory
+2. In CLI(command line interface), type 'export FLASK_APP=application.py'
+3. Type 'flask run', enter and it will start running the server.
+4. Go to 127.0.0.1:5000 at your local browser to view the web app.
