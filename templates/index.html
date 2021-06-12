@@ -42,8 +42,8 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
                   <h1 class="now font-weight-bold">DHUHR</h1>
                 </div>
                 <div class="dateToday"><span class="text-uppercase" id="local_day"></span>, <span class="date" id="currentDate"></span></div>
-                <div class="locationHeader">YOUR LOCATION IS, <p id="location" class="d-inline"> {{ zone }} </p> </div>
-
+                <div class="locationHeader">YOUR LOCATION IS,</div>
+                <p id="location" class="font-weight-bold text-uppercase d-inline"> {{ zone }} </p> 
                 <div class="place font-weight-bold text-uppercase" id="place"></div>
             </div>
             <!--showing local clock-->
@@ -216,6 +216,11 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
             weatherType.innerText = weather.weather[0].main;
 
             position.innerHTML = `${weather.name}`;
+
+            //changeable icon
+            let locationIcon = document.querySelector('.weather-icon');
+            var icon = ("<img src='static/icon/" + weather.weather[0].icon + ".png'>");
+            locationIcon.innerHTML = icon;
         }       
                 
         //Show prayer times
@@ -238,6 +243,16 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
             let isha = document.getElementById('isha');
             isha.innerText = `${location.data.timings.Isha}`
         }
+
+        //get & Display local time and day
+        setInterval(()=>{
+            const current_time = moment();
+            const local_day = current_time.format('dddd'); 
+            const local_time = current_time.format('LTS');
+            document.getElementById("current_time").innerHTML = local_time;
+            document.getElementById("local_day").innerHTML = local_day;
+            //console.log(local_time);
+            }), 1000;
               
 /*
         //Set deadline
