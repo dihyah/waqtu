@@ -1,0 +1,58 @@
+<!--
+Waqtu is a web app that serves as a personal assistance 
+for muslims around the world. At its core function, the app 
+allows users to be aware and ahead of their daily prayer times.
+Copyright (C) 2020 Dihyah Al Hii
+
+Waqtu is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+Waqtu is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
+
+You may reach me at hiidihyah@gmail.com if you have any inquiries.
+-->
+
+
+{% extends "layout02.html" %}
+
+{% block title %}
+    Dua
+{% endblock %}
+
+{% block main02 %}
+    <div class="container duaContent"> 
+    <h1 class="font-weight-bold">Selected Du'a</h1>
+    <!--dua selection droplist-->
+        <div class="container duaSelection">
+            <!--droplist-->
+            <form action="/action_page.php">
+            <label class="selectionLabel" for="du'a">Select Du'a:</label>
+            <select class="form-select" aria-label="Default select example" name="du'a" id="ud'a">
+                <option value="01">1</option>
+                <option value="02">2</option>
+                <option value="03">3</option>
+                <option value="04">4</option>
+            </select>
+            
+            <!--Submit Button-->
+            <input type="submit" class="btn btn-outline-light font-weight-bold d-inline" value="Submit">
+            </form>
+        </div><!--/duaSelection-->
+    <br>
+    <!--dua selection display-->
+        <div class="container duaDisplay text-center">
+            <div class="container">
+                <div class="pt-4" id="duaDisplay">One of the policy of this project is that it's against ads so that means you can expect to use without getting harrassed with ads. Also, you will always have the access of the features from the app. Unlike some others, you'd have to pay to unlock some features of the app such as the upcoming prayer time. This service will never operate with the intention of monetization. After all, every religious act should be with the intention of giving charity.</div>
+            </div>
+        </div><!--/duaDisplay-->
+
+    </div><!--/duaContent-->
+{% endblock %}
