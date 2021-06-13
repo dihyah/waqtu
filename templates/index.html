@@ -150,13 +150,13 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
         //Button for self locate
         document.getElementById("selfLocate").addEventListener("click", function(){
             navigator.geolocation.getCurrentPosition(function(position){
-            latitudeHTML.innerText = position.coords.latitude;
-            longitudeHTML.innerText = position.coords.longitude;
-            latitude = latitudeHTML.innerText;
-            longitude = longitudeHTML.innerText;
-            getLocation(latitude, longitude);
-            autoGetWeatherReport(latitude, longitude);
-            autoGetPrayerTimes(latitude, longitude);
+                latitudeHTML.innerText = position.coords.latitude;
+                longitudeHTML.innerText = position.coords.longitude;
+                latitude = latitudeHTML.innerText;
+                longitude = longitudeHTML.innerText;
+                getLocation(latitude, longitude);
+                autoGetWeatherReport(latitude, longitude);
+                autoGetPrayerTimes(latitude, longitude);
             })
         })
 
@@ -171,7 +171,6 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
 
         //Event Listener Function on submit
         submit.addEventListener('click', function(){
-            getLocation(latitude, longitude);
             getWeatherReport(input.value);
             getPrayerTimes(input.value);
         })
