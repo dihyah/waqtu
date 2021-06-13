@@ -1,0 +1,62 @@
+<!--
+Waqtu is a web app that serves as a personal assistance 
+for muslims around the world. At its core function, the app 
+allows users to be aware and ahead of their daily prayer times.
+Copyright (C) 2020 Dihyah Al Hii
+
+Waqtu is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+any later version.
+
+Waqtu is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
+
+You may reach me at hiidihyah@gmail.com if you have any inquiries.
+-->
+
+
+{% extends "layout02.html" %}
+
+{% block title %}
+    Dua
+{% endblock %}
+
+{% block main02 %}
+    <div class="container duaContent"> 
+    <h1 class="font-weight-bold">Selected Du'a</h1>
+    <!--dua selection droplist-->
+        <div class="container duaSelection">
+            <!--droplist-->
+            <form action="db_dir_here">
+            <label class="selectionLabel" for="du'a">Select Du'a:</label>
+            <select class="form-select" aria-label="Default select example" name="du'a" id="dua" onchange="changeDua()">
+                <option value="Dua_01">Du'a Sesudah Solat Dhuha</option>
+                <option value="Dua_02">Du'a Murah Rezeki</option>
+                <option value="Dua_03">Du'a Dimudahkan Urusan</option>
+            </select>
+        </div><!--/duaSelection-->
+    <br>
+    <!--dua selection display-->
+        <div class="container duaDisplay text-center">
+            <div class="container">
+                <div class="pt-4" id="duaDisplay"></div>
+        </div><!--/duaDisplay-->
+
+    </div><!--/duaContent-->
+
+    {% block script %}
+            <script>
+                function changeDua() {
+                var img = document.getElementById("dua");
+                var value = img.options[img.selectedIndex].value;
+                document.getElementById("duaDisplay").innerHTML = "<img src='static/"+value+".png'>";
+}
+            </script>
+    {% endblock %} 
+{% endblock %}
