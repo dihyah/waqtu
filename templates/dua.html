@@ -33,26 +33,30 @@ You may reach me at hiidihyah@gmail.com if you have any inquiries.
     <!--dua selection droplist-->
         <div class="container duaSelection">
             <!--droplist-->
-            <form action="/action_page.php">
+            <form action="db_dir_here">
             <label class="selectionLabel" for="du'a">Select Du'a:</label>
-            <select class="form-select" aria-label="Default select example" name="du'a" id="ud'a">
-                <option value="01">1</option>
-                <option value="02">2</option>
-                <option value="03">3</option>
-                <option value="04">4</option>
+            <select class="form-select" aria-label="Default select example" name="du'a" id="dua" onchange="changeDua()">
+                <option value="Dua_01">Du'a Sesudah Solat Dhuha</option>
+                <option value="Dua_02">Du'a Murah Rezeki</option>
+                <option value="Dua_03">Du'a Dimudahkan Urusan</option>
             </select>
-            
-            <!--Submit Button-->
-            <input type="submit" class="btn btn-outline-light font-weight-bold d-inline" value="Submit">
-            </form>
         </div><!--/duaSelection-->
     <br>
     <!--dua selection display-->
         <div class="container duaDisplay text-center">
             <div class="container">
-                <div class="pt-4" id="duaDisplay">One of the policy of this project is that it's against ads so that means you can expect to use without getting harrassed with ads. Also, you will always have the access of the features from the app. Unlike some others, you'd have to pay to unlock some features of the app such as the upcoming prayer time. This service will never operate with the intention of monetization. After all, every religious act should be with the intention of giving charity.</div>
-            </div>
+                <div class="pt-4" id="duaDisplay"></div>
         </div><!--/duaDisplay-->
 
     </div><!--/duaContent-->
+
+    {% block script %}
+            <script>
+                function changeDua() {
+                var img = document.getElementById("dua");
+                var value = img.options[img.selectedIndex].value;
+                document.getElementById("duaDisplay").innerHTML = "<img src='static/"+value+".png'>";
+}
+            </script>
+    {% endblock %} 
 {% endblock %}
