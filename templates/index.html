@@ -39,11 +39,11 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
             <div class="col-md-4 col01">
                 <div class="timeNow">
                   <h1 class="nowHeader font-weight-bold">NOW</h1>
-                  <h1 class="now font-weight-bold">DHUHR</h1>
+                  <h1 class="now font-weight-bold">ASR</h1>
                 </div>
                 <div class="dateToday"><span class="text-uppercase" id="local_day"></span>, <span class="date" id="currentDate"></span></div>
-                <div class="locationHeader">YOUR LOCATION IS, <p id="location" class="d-inline"> {{ zone }} </p> </div>
-
+                <div class="locationHeader">YOUR LOCATION IS,</div>
+                <p id="location" class="font-weight-bold text-uppercase d-inline"> {{ zone }} </p> 
                 <div class="place font-weight-bold text-uppercase" id="place"></div>
             </div>
             <!--showing local clock-->
@@ -51,7 +51,7 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
             <!--showing Upcoming Prayer Time-->
             <div class="upcomingPrayer col-md-6 col03 text-center">
                 <h1 class="upcomingHeader font-weight-bold">UPCOMING PRAYER</h1>
-                <div class="nextPrayer">ASR <span class="nextPrayerTime">15:44pm</span></div>
+                <div class="nextPrayer">MAGHRIB <span class="nextPrayerTime">18:31</span></div>
                 <div class="countDownHeader">NEXT PRAYER TIME IN,</div>
                 <div class="countDownTimer" id="timer">2<span>H</span> 18<span>M</span> 10<span>S</span></div>
             </div>
@@ -115,8 +115,8 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
             <script> 
 
         //Global variable declaration
-        var latitude = document.createElement('p');
-        var longitude = document.createElement('p');
+        var latitudeHTML = document.createElement('p');
+        var longitudeHTML = document.createElement('p');
         //Location display
         var position = document.getElementById("location");
         //Get current date
@@ -131,7 +131,7 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
             key: "5dac0acc7f516749376b21bd0e3fea7a",
             base: "https://api.openweathermap.org/data/2.5/"
         }        
-        const prayer_api = "https://api.aladhan.com/v1/timingsByAddress/"
+        const prayer_api = "https://api.aladhan.com/v1/timings"
             
         //Display current date
         currentDate.innerHTML = (today); 
@@ -139,10 +139,26 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
         //Get geolocation
         navigator.geolocation.getCurrentPosition(function(position){
             //console.log(`latitude: ${position.coords.latitude}, longitude: ${position.coords.longitude}`);
-            latitude.innerText = position.coords.latitude;
-            longitude.innerText = position.coords.longitude;
+            latitudeHTML.innerText = position.coords.latitude;
+            longitudeHTML.innerText = position.coords.longitude;
+            latitude = latitudeHTML.innerText;
+            longitude = longitudeHTML.innerText;
             getLocation(latitude, longitude);
+            autoGetWeatherReport(latitude, longitude);
+            autoGetPrayerTimes(latitude, longitude);
         });
+        //Button for self locate
+        document.getElementById("selfLocate").addEventListener("click", function(){
+            navigator.geolocation.getCurrentPosition(function(position){
+            latitudeHTML.innerText = position.coords.latitude;
+            longitudeHTML.innerText = position.coords.longitude;
+            latitude = latitudeHTML.innerText;
+            longitude = longitudeHTML.innerText;
+            getLocation(latitude, longitude);
+            autoGetWeatherReport(latitude, longitude);
+            autoGetPrayerTimes(latitude, longitude);
+            })
+        })
 
         //Disables submit button if user doesn't input anything.
         document.querySelector('#input').onkeyup = function(){
@@ -155,7 +171,6 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
 
         //Event Listener Function on submit
         submit.addEventListener('click', function(){
-            console.log('click');
             getLocation(latitude, longitude);
             getWeatherReport(input.value);
             getPrayerTimes(input.value);
@@ -173,7 +188,7 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
         //Parse URL for JSON data
         //Get Location (https://api.bigdatacloud.net/data/reverse-geocode-client?4.9&114.08&localityLanguage=en)
         function getLocation(latitude, longitude){
-            fetch(`${location_api}${latitude.innerText}&${longitude.innerText}&localityLanguage=en`)
+            fetch(`${location_api}${latitude}&${longitude}&localityLanguage=en`)
             .then(address =>{
                 return address.json();
             }).then(show);
@@ -187,9 +202,24 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
 	    }).then(showWeatherReport);
         }
 
+        //https://api.openweathermap.org/data/2.5/weather?lat=4.724123&lon=114.09182347&appid=5dac0acc7f516749376b21bd0e3fea7a
+        function autoGetWeatherReport(latitude, longitude){
+            fetch(`${weather_api.base}weather?lat=${latitude}&lon=${longitude}&appid=${weather_api.key}&units=metric`)
+	    .then(weather =>{
+		    return weather.json();
+	    }).then(showWeatherReport);
+        }
+
+        function autoGetPrayerTimes(latitude, longitude){
+            fetch(`${prayer_api}/1398332113?latitude=${latitude}&longitude=${longitude}&method=2`)
+            .then(location =>{
+                return location.json();
+            }).then(display);
+        }
+                
         //Get Prayer times (https://api.aladhan.com/v1/timingsByAddress?address=Brunei&method=3)
         function getPrayerTimes(location){
-            fetch(`${prayer_api}{today}?address=${input.value}&method=3`)
+            fetch(`${prayer_api}ByAddress/{today}?address=${input.value}&method=3`)
             .then(location =>{
                 return location.json();
             }).then(display);
@@ -203,6 +233,7 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
 
         //Show weather report
         function showWeatherReport(weather){
+            //console.log(weather);
             let temperature = document.getElementById("temp");
             temperature.innerHTML = `${Math.round(weather.main.temp)}&deg;C`;
 
@@ -216,10 +247,16 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
             weatherType.innerText = weather.weather[0].main;
 
             position.innerHTML = `${weather.name}`;
+
+            //changeable icon
+            let locationIcon = document.querySelector('.weather-icon');
+            var icon = ("<img src='static/icon/" + weather.weather[0].icon + ".png'>");
+            locationIcon.innerHTML = icon;
         }       
                 
         //Show prayer times
         function display(location){
+            //console.log(location);
             let fajr = document.getElementById('fajr');
             fajr.innerText = `${location.data.timings.Fajr}`
 
@@ -238,10 +275,19 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
             let isha = document.getElementById('isha');
             isha.innerText = `${location.data.timings.Isha}`
         }
+
+        //get & Display local time and day
+        setInterval(()=>{
+            const current_time = moment();
+            const local_day = current_time.format('dddd'); 
+            const local_time = current_time.format('LTS');
+            document.getElementById("current_time").innerHTML = local_time;
+            document.getElementById("local_day").innerHTML = local_day;
+            //console.log(local_time);
+            }), 1000;
               
-/*
         //Set deadline
-        var countDownDate = new Date("Aug 7, 2021 00:00:00").getTime();
+        var countDownDate = new Date("Aug 7, 2021 19:44:00").getTime();
         //Update countdown every 1 second
         var y = setInterval(function(){
             //Get today's datetime
@@ -261,7 +307,6 @@ along with Waqtu.  If not, see <https://www.gnu.org/licenses/>.
                 document.getElementById("timer").innerHTML = "TIME'S UP";
             }
         }, 1000);
-*/
 
             </script>
     {% endblock %}
