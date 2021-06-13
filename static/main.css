@@ -154,7 +154,12 @@
 
 /*Location*/
 .locationHeader{
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+}
+
+#location{
+    line-height: 2rem;
+    font-size: 1.7rem;
 }
 
 .place{
@@ -242,4 +247,29 @@
 
 .footer a{
     color: #2b3990;
+}
+
+/*Du'a Content*/
+.duaContent{
+	font-family: Codec-Pro;
+	color: #006838;
+}
+
+.selectionLabel{
+    font-size: 1.5rem;
+}
+
+.duaDisplay{
+	height: 60vh;
+	width: auto;
+	background: rgba(139, 195, 64, 0.7);
+	box-shadow: 6px 6px rgba(0, 104, 56, 0.3); 
+	border-radius: 5px;
+}
+
+/*Du'a Image Selection*/
+#duaDisplay img{
+    text-align: center;
+    height: 400px;
+    width: auto;
 }
